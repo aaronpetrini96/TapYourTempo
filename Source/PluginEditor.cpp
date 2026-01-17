@@ -31,9 +31,8 @@ TapYourTempoAudioProcessorEditor::TapYourTempoAudioProcessorEditor (TapYourTempo
     halfTempoButton.onClick = [this] {updateMultiplier(1);};
     doubleTempoButton.onClick = [this] {updateMultiplier(2);};
     
-    bpmLabel.setFont(juce::Font(juce::FontOptions("Barber Chop", 55.f, juce::Font::FontStyleFlags::plain)));
-    if (!keyWasPressed)
-        bpmLabel.setText("TAP TEMPO PRESSING THE SPACE BAR", juce::dontSendNotification);
+    bpmLabel.setFont(juce::Font(juce::FontOptions("Barber Chop", 50.f, juce::Font::FontStyleFlags::plain)));
+    bpmLabel.setText("Press Space to tap tempo", juce::dontSendNotification);
     bpmLabel.setJustificationType(juce::Justification::centred);
     bpmLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
     bpmLabel.setColour(juce::Label::ColourIds::outlineColourId, juce::Colours::white.withAlpha(0.6f));
