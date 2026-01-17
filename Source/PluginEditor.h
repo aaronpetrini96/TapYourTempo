@@ -49,6 +49,7 @@ private:
     juce::Label bpmLabel;
     juce::uint32 lastFlashTime = 0;
     bool keyWasPressed {false};
+
     
     juce::TextButton halfTempoButton {"x0.5"}, doubleTempoButton {"x2"};
     std::vector<juce::TextButton*> textButtons {&halfTempoButton, &doubleTempoButton};

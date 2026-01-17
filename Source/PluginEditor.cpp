@@ -19,25 +19,24 @@ TapYourTempoAudioProcessorEditor::TapYourTempoAudioProcessorEditor (TapYourTempo
     for (auto& button : textButtons)
     {
         button->setRadioGroupId(123);
-//        button->setClickingTogglesState(true);
+        button->setClickingTogglesState(false);
         button->setColour(juce::ToggleButton::ColourIds::textColourId, juce::Colours::white);
         button->setColour(juce::TextButton::ColourIds::buttonColourId, offColor);
         button->setColour(juce::TextButton::ColourIds::buttonOnColourId, onColor);
+        button->setColour(juce::ComboBox::ColourIds::outlineColourId, juce::Colours::white.withAlpha(0.6f));
         button->setLookAndFeel(&textButtonLAF);
         addAndMakeVisible(*button);
     }
     
-    halfTempoButton.onClick = [this]
-    {
-        updateMultiplier(1);
-    };
+    halfTempoButton.onClick = [this] {updateMultiplier(1);};
     doubleTempoButton.onClick = [this] {updateMultiplier(2);};
     
-    bpmLabel.setFont(juce::Font(juce::FontOptions("Barber Chop", 46.f, juce::Font::FontStyleFlags::plain)));
-    bpmLabel.setText("TAP TEMPO PRESSING THE SPACE BAR", juce::dontSendNotification);
+    bpmLabel.setFont(juce::Font(juce::FontOptions("Barber Chop", 55.f, juce::Font::FontStyleFlags::plain)));
+    if (!keyWasPressed)
+        bpmLabel.setText("TAP TEMPO PRESSING THE SPACE BAR", juce::dontSendNotification);
     bpmLabel.setJustificationType(juce::Justification::centred);
     bpmLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
-    bpmLabel.setColour(juce::Label::ColourIds::outlineColourId, juce::Colours::white);
+    bpmLabel.setColour(juce::Label::ColourIds::outlineColourId, juce::Colours::white.withAlpha(0.6f));
     addAndMakeVisible(bpmLabel);
     
     
@@ -53,7 +52,11 @@ TapYourTempoAudioProcessorEditor::~TapYourTempoAudioProcessorEditor()
 //==============================================================================
 void TapYourTempoAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    g.fillAll(juce::Colours::black);
+//    g.fillAll(offColor);
+    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    
+    g.setColour(juce::Colours::white.withAlpha(0.5f));
+    g.drawLine(guiWidth/2, 250, guiWidth/2, guiHeight, 1.0f);
     
     const auto now = juce::Time::getMillisecondCounter();
     const bool flash = (now - lastFlashTime) < 120;
