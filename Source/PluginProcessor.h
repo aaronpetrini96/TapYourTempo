@@ -29,6 +29,9 @@ public:
    #endif
 
     void processBlock (juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
+    
+    void tap();
+    float getBPM() const {return bpm.load();}
 
     //==============================================================================
     juce::AudioProcessorEditor* createEditor() override;
@@ -37,9 +40,9 @@ public:
     //==============================================================================
     const juce::String getName() const override;
 
-    bool acceptsMidi() const override;
-    bool producesMidi() const override;
-    bool isMidiEffect() const override;
+    bool acceptsMidi() const override {return false;}
+    bool producesMidi() const override {return false;}
+    bool isMidiEffect() const override {return false;}
     double getTailLengthSeconds() const override;
 
     //==============================================================================
@@ -54,6 +57,12 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
 private:
+    
+    std::array<double, 6> intervals {};
+    int intervalIndex = 0;
+    double lastTapTime = 0.0;
+    
+    std::atomic<float> bpm {120.f};
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TapYourTempoAudioProcessor)
 };

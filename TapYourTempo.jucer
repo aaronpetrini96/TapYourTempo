@@ -5,6 +5,7 @@
               cppLanguageStandard="latest">
   <MAINGROUP id="gq0CQP" name="TapYourTempo">
     <GROUP id="{0B4D1C58-2CC6-34CB-677E-1DA538779744}" name="Source">
+      <FILE id="cARFvJ" name="TextButtonLAF.h" compile="0" resource="0" file="Source/TextButtonLAF.h"/>
       <FILE id="oEjask" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="CmbJgU" name="PluginProcessor.h" compile="0" resource="0"
